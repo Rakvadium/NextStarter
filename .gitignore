@@ -17,6 +17,8 @@
 /.next/
 /out/
 
+/docs/
+
 # production
 /build
 
@@ -39,3 +41,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.claude
+
+# convex
+.convex
+convex/_generated/
+# Don't commit generated JS files from TS sources
+convex/**/*.js
+convex/**/*.js.map

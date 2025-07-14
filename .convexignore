@@ -1,0 +1,11 @@
+# Ignore generated JavaScript files
+*.js
+*.js.map
+
+# Ignore test files
+*.test.ts
+*.spec.ts
+
+# Ignore temporary files
+*.tmp
+*~
