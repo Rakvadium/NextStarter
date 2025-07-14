@@ -2,16 +2,12 @@
 
 import {
   Home,
-  FileText,
   Settings,
   ChevronUp,
-  User,
   CreditCard,
   Package,
   ShoppingCart,
-  TrendingUp,
   Building2,
-  MoreHorizontal,
   LogOut,
   Moon,
   Sun,
@@ -32,9 +28,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarRail,
   useSidebar,
 } from '@/components/ui/sidebar'
@@ -48,7 +41,6 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
 } from '@/components/ui/dropdown-menu'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import Link from 'next/link'
 
@@ -67,11 +59,6 @@ const platformItems = [
     title: 'Items',
     url: '/items',
     icon: Package,
-  },
-  {
-    title: 'Account',
-    url: '/account',
-    icon: User,
   },
 ]
 
@@ -135,7 +122,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {platformItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={pathname === item.url}>
+                  <SidebarMenuButton asChild isActive={pathname === item.url} tooltip={item.title}>
                     <Link href={item.url}>
                       <item.icon className="size-4" />
                       <span>{item.title}</span>
@@ -143,14 +130,6 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/settings">
-                    <Settings className="size-4" />
-                    <span>Settings</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -160,7 +139,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {projectItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={pathname === item.url}>
+                  <SidebarMenuButton asChild isActive={pathname === item.url} tooltip={item.title}>
                     <Link href={item.url}>
                       <item.icon className="size-4" />
                       <span>{item.title}</span>
@@ -168,7 +147,7 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-              <Collapsible className="group/collapsible">
+              {/* <Collapsible className="group/collapsible">
                 <SidebarMenuItem>
                   <CollapsibleTrigger asChild>
                     <SidebarMenuButton>
@@ -198,7 +177,7 @@ export function AppSidebar() {
                     </SidebarMenuSub>
                   </CollapsibleContent>
                 </SidebarMenuItem>
-              </Collapsible>
+              </Collapsible> */}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -236,20 +215,8 @@ export function AppSidebar() {
                 sideOffset={4}
               >
                 <DropdownMenuItem onSelect={() => openUserProfile()} className="cursor-pointer">
-                  <User className="mr-2 size-4" />
-                  Manage Account
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/account">
-                    <User className="mr-2 size-4" />
-                    Account Settings
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/settings">
-                    <Settings className="mr-2 size-4" />
-                    App Settings
-                  </Link>
+                  <Settings className="mr-2 size-4" />
+                  Account Settings
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuLabel>Theme</DropdownMenuLabel>
