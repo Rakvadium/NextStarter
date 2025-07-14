@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { UserButton } from '@clerk/nextjs'
 import { ThemeToggle } from '@/components/layout/theme-toggle'
+import { MobileNav } from '@/components/layout/mobile-nav'
 import { cn } from '@/lib/utils'
 
 const navigation = [
@@ -20,13 +21,14 @@ export function Navbar() {
 
   return (
     <nav className="border-b">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link href="/dashboard" className="text-xl font-semibold">
+            <MobileNav />
+            <Link href="/dashboard" className="text-lg font-semibold sm:text-xl">
               NextJS Skeleton
             </Link>
-            <div className="ml-10 flex items-baseline space-x-4">
+            <div className="ml-10 hidden items-baseline space-x-4 md:flex">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -43,7 +45,7 @@ export function Navbar() {
               ))}
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <ThemeToggle />
             <UserButton afterSignOutUrl="/" />
           </div>
