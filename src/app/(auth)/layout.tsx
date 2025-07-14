@@ -1,7 +1,9 @@
 import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
-import { Navbar } from '@/components/layout/navbar'
+import { AppSidebar } from '@/components/layout/app-sidebar'
 import { StripeCustomerProvider } from '@/components/layout/stripe-customer-provider'
+import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { ThemeToggle } from '@/components/layout/theme-toggle'
 
 export default async function AuthLayout({ children }: { children: React.ReactNode }) {
   const { userId } = await auth()
@@ -12,10 +14,17 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
 
   return (
     <StripeCustomerProvider>
-      <div className="bg-background min-h-screen">
-        <Navbar />
-        <main className="container mx-auto px-4 py-4 sm:px-6 sm:py-6 lg:px-8">{children}</main>
-      </div>
+      <SidebarProvider>
+        <AppSidebar />
+        <SidebarInset>
+          <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+            <SidebarTrigger className="-ml-1" />
+            <div className="flex-1" />
+            <ThemeToggle />
+          </header>
+          <main className="flex-1 overflow-auto p-4 md:p-6">{children}</main>
+        </SidebarInset>
+      </SidebarProvider>
     </StripeCustomerProvider>
   )
 }

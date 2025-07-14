@@ -54,6 +54,9 @@ export function PurchaseButton({
         window.location.href = url
       } else if (sessionId) {
         const stripe = await getStripe()
+        if (!stripe) {
+          throw new Error('Stripe not loaded')
+        }
         const { error } = await stripe.redirectToCheckout({ sessionId })
 
         if (error) {
