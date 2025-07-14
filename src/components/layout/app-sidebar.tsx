@@ -13,9 +13,13 @@ import {
   Building2,
   MoreHorizontal,
   LogOut,
+  Moon,
+  Sun,
+  Monitor,
 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useUser, useClerk } from '@clerk/nextjs'
+import { useTheme } from 'next-themes'
 
 import {
   Sidebar,
@@ -40,6 +44,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
 } from '@/components/ui/dropdown-menu'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -86,6 +93,7 @@ export function AppSidebar() {
   const { state } = useSidebar()
   const { user } = useUser()
   const { signOut, openUserProfile } = useClerk()
+  const { theme, setTheme } = useTheme()
 
   const getUserInitials = () => {
     if (!user) return 'U'
@@ -243,6 +251,22 @@ export function AppSidebar() {
                     App Settings
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>Theme</DropdownMenuLabel>
+                <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
+                  <DropdownMenuRadioItem value="light" className="cursor-pointer">
+                    <Sun className="mr-2 size-4" />
+                    Light
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="dark" className="cursor-pointer">
+                    <Moon className="mr-2 size-4" />
+                    Dark
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="system" className="cursor-pointer">
+                    <Monitor className="mr-2 size-4" />
+                    System
+                  </DropdownMenuRadioItem>
+                </DropdownMenuRadioGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                   onSelect={() => signOut()}
